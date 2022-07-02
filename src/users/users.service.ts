@@ -37,7 +37,7 @@ export class UsersService {
     const address = user.address;
     return this.prismaService.user.create({
       data: {
-        ...UsersService,
+        ...user,
         address: {
           create: address,
         },
