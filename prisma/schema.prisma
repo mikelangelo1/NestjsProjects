@@ -8,11 +8,12 @@ generator client {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  email     String  @unique
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
   name      String
-  password  String 
-  addressId Int 
+  password  String
+  addressId Int? @unique
+  address   Address? @relation(fields: [addressId], references: [id])
   posts     Post[]
 }
 
@@ -25,9 +26,16 @@ model Post {
   category Category[]
 }
 
+model Address {
+  id      Int    @id @default(autoincrement())
+  street  String
+  city    String
+  country String
+  user    User?  
+}
+
 model Category {
   id    Int    @id @default(autoincrement())
   name  String
   posts Post[]
 }
-
